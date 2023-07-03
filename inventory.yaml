@@ -1,0 +1,9 @@
+artists:
+  artist1:
+    artist_id: 2cabffd3c7cb40ae6541b7f10a640b41190ccb27
+    albums:
+      album1:
+        album_id: 5d55421309c535e93c7133b6e32d901e420d34e3
+        tracks:
+        - t1
+        - t2
