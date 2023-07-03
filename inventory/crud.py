@@ -1,10 +1,14 @@
 import yaml
 import uuid
+from pathlib import Path
 
 
 class Inventory:
     def __init__(self):
-        self.schema = {"artists": {}}
+        # TODO: change inventory path to the init directory: `$HOME/.tunehunt/inventory.yaml`
+        self.inventory_file: Path = Path('../testing/inventory.yaml')
+        self.schema: dict = {"artists": {}}
+        self.data: dict = self._load_data()
 
     def create_inventory(self, artist: str, album: str, tracks: list) -> None:
         self.schema["artists"][artist] = {
@@ -14,16 +18,22 @@ class Inventory:
                     "album_id": self._generate_album_id(artist_name=artist,
                                                         album_name=album),
                     "tracks": tracks
-                }
+                },
             }
         }
-        inventory = yaml.dump(self.schema, sort_keys=False)
-        # TODO: change path to the init directory: $HOME/.tunehunt/inventory.yaml
-        with open('inventory.yaml', 'w') as file:
-            file.write(inventory)
+        with open(self.inventory_file, 'w') as file:
+            yaml.safe_dump(self.schema, file, sort_keys=False)
 
-    def read_inventory(self):
-        pass
+    def _load_data(self):
+        try:
+            with open(self.inventory_file, 'r') as file:
+                return yaml.safe_load(file) or {}
+        except FileNotFoundError:
+            return {}
+
+    def _save_data(self):
+        with open(self.inventory_file, 'w') as file:
+            yaml.safe_dump(self.data, file, sort_keys=False)
 
     def update_inventory(self):
         pass

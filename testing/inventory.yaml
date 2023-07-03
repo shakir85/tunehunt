@@ -1,0 +1,19 @@
+artists:
+  artist-02:
+    artist_id: 507e90f9-bc6f-515b-80e1-5b41039c2845
+    albums:
+      album-02:
+        album_id: cfd96676-4270-56b1-a9bc-9552f5212a00
+        tracks:
+        - Beat Thee.mp3
+        - The Celebrated Minuet.mp3
+        - Study and Relax.mp3
+  artist-01:
+    artist_id: 5affbb5e-2dca-5cdc-aa2d-d0df9e19c5b3
+    albums:
+      album-02:
+        album_id: 0d3fe016-79c2-5811-8843-b7a40c640cc1
+        tracks:
+        - Relax.mp3
+        - Thee.mp3
+        - The  Minuet.mp3

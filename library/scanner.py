@@ -39,12 +39,20 @@ def assemble_audio_files(directory: Path):
                 if is_audio_file(track_file):
                     tracks.append(track_file.name)
 
-            yield artist_dir.name, album_dir.name, tracks
+            data = {
+                artist_dir.name: {
+                    album_dir.name: tracks
+                }
+            }
+            yield data
 
 
-music_library = {}
-for artist, album, tracks in assemble_audio_files(pathlib.Path('../testing')):
-    obj.create_inventory(artist, album, tracks)
+# {'artist-02': {'album-01': ['Beat Thee.mp3', 'The Celebrated Minuet.mp3', 'Study and Relax.mp3']}}
+for i in assemble_audio_files(pathlib.Path('../testing')):
+    for artist, albums in i.items():
+        for album, tracks in albums.items():
+            # print(album, tracks)
+            obj.create_inventory(artist, album, tracks)
     # artist_data = music_library.setdefault(artist, {})
     # artist_data[album] = tracks
 
