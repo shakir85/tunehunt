@@ -3,7 +3,7 @@ import pathlib
 import magic
 import ffmpeg
 from pathlib import Path
-
+from inventory import crud
 obj = crud.Inventory()
 
 
@@ -44,10 +44,8 @@ def assemble_audio_files(directory: Path):
 
 music_library = {}
 for artist, album, tracks in assemble_audio_files(pathlib.Path('../testing')):
+    obj.create_inventory(artist, album, tracks)
+    # artist_data = music_library.setdefault(artist, {})
+    # artist_data[album] = tracks
 
-    artist_data = music_library.setdefault(artist, {})
-    artist_data[album] = tracks
-
-# Print the resulting music library dictionary
-print(music_library)
 
