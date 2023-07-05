@@ -40,20 +40,22 @@ def assemble_audio_files(directory: Path):
                     tracks.append(track_file.name)
 
             data = {
-                artist_dir.name: {
-                    album_dir.name: tracks
+                'artists': {
+                    artist_dir.name: {
+                        'albums': {
+                            album_dir.name: tracks
+                        }
+                    }
                 }
             }
             yield data
 
 
 # {'artist-02': {'album-01': ['Beat Thee.mp3', 'The Celebrated Minuet.mp3', 'Study and Relax.mp3']}}
+from jinja2 import Template
+with open('../template.jinja') as file:
+    template = Template(file.read())
+
 for i in assemble_audio_files(pathlib.Path('../testing')):
-    for artist, albums in i.items():
-        for album, tracks in albums.items():
-            # print(album, tracks)
-            obj.create_inventory(artist, album, tracks)
-    # artist_data = music_library.setdefault(artist, {})
-    # artist_data[album] = tracks
-
-
+    output = template.render(i)
+    print(output)

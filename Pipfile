@@ -8,6 +8,7 @@ click = "*"
 pyyaml = "*"
 python-magic = "*"
 ffmpeg-python = "*"
+jinja2 = "*"
 
 [dev-packages]
 
