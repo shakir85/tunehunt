@@ -17,7 +17,7 @@ def is_audio_file(file_path: Path) -> bool:
         return mime_type.startswith('audio/')
 
 
-def assemble_audio_files(directory: Path):
+def fetch_audio_files(directory: Path):
     directory_path = Path(directory)
 
     # Iterate over the artist directories
@@ -40,22 +40,23 @@ def assemble_audio_files(directory: Path):
                     tracks.append(track_file.name)
 
             data = {
-                'artists': {
+                'data': {
                     artist_dir.name: {
-                        'albums': {
-                            album_dir.name: tracks
-                        }
+                        album_dir.name: tracks
                     }
                 }
             }
             yield data
 
 
-# {'artist-02': {'album-01': ['Beat Thee.mp3', 'The Celebrated Minuet.mp3', 'Study and Relax.mp3']}}
+def assemble_crate():
+    pass
+
+
 from jinja2 import Template
 with open('../template.jinja') as file:
     template = Template(file.read())
 
-for i in assemble_audio_files(pathlib.Path('../testing')):
+for i in fetch_audio_files(pathlib.Path('../testing')):
     output = template.render(i)
     print(output)

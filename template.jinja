@@ -1,16 +1,10 @@
-# template.jinja
-
-artists:
-{% for artist_key, artist_value in artists.items() %}
-  {{ artist_key }}:
-    artist_id: {{ artist_value.artist_id }}
-    albums:
-{% for album_key, album_value in artist_value.albums.items() %}
-      {{ album_key }}:
-        album_id: {{ album_value.album_id }}
-        tracks:
-{% for track in album_value.tracks %}
-        - {{ track }}
+{% for artist_name, album_data in data.items() %}
+{{- artist_name }}:
+  {% for album_name, tracks in album_data.items() %}
+    {{- album_name }}:
+    tracks
+    {%- for track in tracks %}
+     - {{ track -}}
 {% endfor %}
-{% endfor %}
-{% endfor %}
+{%- endfor -%}
+{%- endfor -%}

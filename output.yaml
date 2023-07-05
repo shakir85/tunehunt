@@ -1,3 +1,13 @@
-# template.jinja
-name: John Doe
-age: 25
+
+artist-01:
+
+  album-02:
+    tracks:
+
+    - Relax.mp3
+
+    - Thee.mp3
+
+    - The  Minuet.mp3
+
+
